@@ -1,0 +1,3 @@
+insert into SecurityDeposit (TransactionDate,Amount,WalletNo,UserID,YearID,IsJournal,RefNo) 
+select DateOfDeposit,Amounts,MasterAgent,'opus',2,Case when RefundAmount!=0 then 1 when Amounts>0 then 0 when Amounts=null then null end,'SD-0'+Convert(nvarchar(10),cast(((ROW_NUMBER()over(order by ID))+1) as nvarchar))+'/'+'1'+'/'+Convert(nvarchar(30),cast(getdate() as date),106) from LDDis 
+where SecurityDepositStatus is not null
